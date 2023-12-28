@@ -9,20 +9,26 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
+from dotenv import load_dotenv
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Чтение файла с переменными окружения
+load_dotenv(BASE_DIR / '.env')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a4zu=&u1%nfq%=-7=wgf9_1qqd=lt1watft3)bgn&0&-($ngwt'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+DOMAIN_NAME = os.getenv('DOMAIN_NAME')
 
 ALLOWED_HOSTS = []
 
@@ -76,7 +82,11 @@ WSGI_APPLICATION = 'employee_task_tracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "NAME": os.getenv('POSTGRES_DB'), # Название БД
+        "USER": os.getenv('POSTGRES_USER'), # Пользователь для подключения
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD'), # Пароль для этого пользователя
+        "HOST": os.getenv('POSTGRES_HOST'), # Адрес, на котором развернут сервер БД
+        "PORT": '5432', # Порт, на котором работает сервер БД
     }
 }
 
