@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'tasks',
     'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -81,12 +82,12 @@ WSGI_APPLICATION = 'employee_task_tracker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        "NAME": os.getenv('POSTGRES_DB'), # Название БД
-        "USER": os.getenv('POSTGRES_USER'), # Пользователь для подключения
-        "PASSWORD": os.getenv('POSTGRES_PASSWORD'), # Пароль для этого пользователя
-        "HOST": os.getenv('POSTGRES_HOST'), # Адрес, на котором развернут сервер БД
-        "PORT": '5432', # Порт, на котором работает сервер БД
+        'ENGINE': 'django.db.backends.postgresql',
+        "NAME": os.getenv('POSTGRES_DB'),  # Название БД
+        "USER": os.getenv('POSTGRES_USER'),  # Пользователь для подключения
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),  # Пароль для этого пользователя
+        "HOST": os.getenv('POSTGRES_HOST'),  # Адрес, на котором развернут сервер БД
+        "PORT": '5432',  # Порт, на котором работает сервер БД
     }
 }
 
@@ -130,4 +131,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Настройка проекта для работы с новой моделью пользователя
-AUTH_USER_MODEL = 'users.User'
+# AUTH_USER_MODEL = 'users.User'
