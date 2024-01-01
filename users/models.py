@@ -6,20 +6,22 @@ class EmployeeUser(AbstractUser):
     """
         Модель сотрудника с доаолнительными полями.
 
-        Дополнительные поля: employee_id, position, chat_id.
+        Дополнительные поля: employee_id, full_name, position, chat_id.
 
-        Поля,унаследованные от AbstractUser: first_name, last_name, email.
+        Поля,унаследованные от AbstractUser: email.
 
         Attributes:
             employee_id (str): Идентификатор сотрудника.
+            full_name (str): ФИО сотрудника.
             email (str): Уникальный адрес электронной почты пользователя.
             position (str): Должность сотрудника.
             chat_id(str): id чата в tg
         """
     employee_id = models.CharField(max_length=10, unique=True, verbose_name='идентификатор сотрудника')
     username = None
+    full_name = models.CharField(max_length=255, default= 'undefined',verbose_name='ФИО')
     email = models.EmailField(
-        unique=True, verbose_name="электронная почта пользователя"
+        unique=True, verbose_name='электронная почта пользователя'
     )
     position = models.CharField(max_length=50, verbose_name='должность')
     chat_id = models.CharField(
