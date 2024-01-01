@@ -3,6 +3,19 @@ from django.db import models
 
 
 class EmployeeUser(AbstractUser):
+    """
+        Модель сотрудника с доаолнительными полями.
+
+        Дополнительные поля: employee_id, position, chat_id.
+
+        Поля,унаследованные от AbstractUser: first_name, last_name, email.
+
+        Attributes:
+            employee_id (str): Идентификатор сотрудника.
+            email (str): Уникальный адрес электронной почты пользователя.
+            position (str): Должность сотрудника.
+            chat_id(str): id чата в tg
+        """
     employee_id = models.CharField(max_length=10, unique=True, verbose_name='идентификатор сотрудника')
     username = None
     email = models.EmailField(
