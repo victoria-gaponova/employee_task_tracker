@@ -8,8 +8,7 @@ class EmployeeUserSerializer(serializers.ModelSerializer):
 
     Attributes:
         employee_id (str): Уникальный идентификатор сотрудника.
-        first_name (str): Имя сотрудника.
-        last_name (str): Фамилия сотрудника.
+        full_name (str): ФИО сотрудника.
         email (str): Адрес электронной почты сотрудника.
         position (str): Должность сотрудника.
         chat_id (str): id чата сотрудника в telegram.
@@ -17,4 +16,4 @@ class EmployeeUserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = get_user_model()
-        fields = ['employee_id', 'first_name', 'last_name', 'email', 'position', 'chat_id']
+        fields = ['employee_id', 'full_name', 'email', 'position', 'chat_id']
