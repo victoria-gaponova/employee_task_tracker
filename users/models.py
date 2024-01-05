@@ -2,34 +2,42 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class EmployeeUser(AbstractUser):
+class Employee(AbstractUser):
     """
-        Модель сотрудника с дополнительными полями.
+    Расширенная модель пользователя для представления сотрудников.
 
-        Дополнительные поля: employee_id, full_name, position, chat_id.
+    Attributes:
+        username (None): Поле username устанавливается в None, так как в данной модели
+                         мы используем email в качестве уникального идентификатора пользователя.
+        full_name (str): Полное имя сотрудника.
+        email (str): Уникальный адрес электронной почты сотрудника.
+        position (str): Должность сотрудника.
+        chat_id (str): Идентификатор сотрудника в Telegram.
 
-        Поля,унаследованные от AbstractUser: email.
+    USERNAME_FIELD:
+        Поле email используется в качестве уникального идентификатора для входа в систему.
 
-        Attributes:
-            employee_id (str): Идентификатор сотрудника.
-            full_name (str): ФИО сотрудника.
-            email (str): Уникальный адрес электронной почты сотрудника.
-            position (str): Должность сотрудника.
-            chat_id(str): id чата в tg
-        """
-    employee_id = models.CharField(max_length=10, unique=True, verbose_name='идентификатор сотрудника')
+    REQUIRED_FIELDS:
+        Поле, необходимое для создания суперпользователя. В данном случае, не требуется
+        дополнительных полей для создания суперпользователя.
+
+    """
+
     username = None
-    full_name = models.CharField(max_length=255, default= 'undefined',verbose_name='ФИО')
-    email = models.EmailField(
-        unique=True, verbose_name='электронная почта сотрудника'
+    full_name = models.CharField(
+        max_length=255, default="undefined", verbose_name="ФИО"
     )
-    position = models.CharField(max_length=50, verbose_name='должность')
+    email = models.EmailField(unique=True, verbose_name="электронная почта сотрудника")
+    position = models.CharField(max_length=50, verbose_name="должность")
     chat_id = models.CharField(
-        max_length=20, unique=True, default=0, verbose_name="id пользователя в телеграм"
+        max_length=20,
+        unique=True,
+        default="",
+        verbose_name="идентификатор сотрудника в Telegram",
     )
-    is_busy = models.BooleanField(default=False, help_text="признак занятости сотрудника")
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
-
+    class Meta:
+        verbose_name = "Employee"
