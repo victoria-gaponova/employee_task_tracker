@@ -12,7 +12,6 @@ class Command(BaseCommand):
         faker = Faker()
         Employee.objects.all().delete()
 
-        # Генерация данных сотрудников
         for _ in range(10):  # Количество сотрудников для создания
             Employee.objects.create(
                 full_name=faker.name(),
